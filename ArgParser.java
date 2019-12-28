@@ -1,9 +1,13 @@
 /**
 * This is a simple command line argument parser.
 * For regular use.
+<<<<<<< HEAD
 * 
 * https://github.com/0x30c4/argparser
 *
+=======
+* https://github.com/0x30c4/argparser
+>>>>>>> 8a8891fcbc43f596cc401a2265ebf76d080b1c1a
 * @author  Sanaf
 * @version 1.0
 * @since   2019-12-26
