@@ -1,15 +1,20 @@
-import java.io.*;
+import java.io.DataInputStream;
+import java.io.PrintStream;
+import java.io.BufferedInputStream;
+import java.io.FileOutputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
 
 public class FileHandler{
-	public void file_sender(String f, PrintStream out) {
+	public void fileSender(String fileName, PrintStream outStream, int byteSize) {
 		try{
-			FileInputStream fin = new FileInputStream(f);
+			FileInputStream fin = new FileInputStream(fileName);
 			
-			byte[] b = new byte[1024];
+			byte[] b = new byte[byteSize];
 			int noOfBytes = 0;
 			
 			while( (noOfBytes = fin.read(b)) != -1 ){
-				out.write(b, 0, noOfBytes);
+				outStream.write(b, 0, noOfBytes);
 			}
 			fin.close();
 			
@@ -17,22 +22,17 @@ public class FileHandler{
 			System.out.println(e);
 		}
     }
-	public void file_recever(String f, DataInputStream in){
-		if (f.equals("NONE.NONE")){
-			System.out.print(2);
-    	}else{
-			try{
-				FileOutputStream fout = new FileOutputStream(f);
-				byte[] b = new byte[1024];
-				int noOfBytes = 0;
-
-				while( (noOfBytes = in.read(b)) != -1 ){
-					fout.write(b, 0, noOfBytes);
-				}
-				fout.close();
-			}catch(Exception e){
-				System.out.println(e);
+	public void fileRecever(String f, DataInputStream inStream, int byteSize){
+		try{
+			FileOutputStream fout = new FileOutputStream(f);
+			byte[] b = new byte[byteSize];
+			int noOfBytes = 0;
+			while( (noOfBytes = inStream.read(b)) != -1 ){
+				fout.write(b, 0, noOfBytes);
 			}
+			fout.close();
+		}catch(Exception e){
+			System.out.println(e);
 		}
 	}
 }
