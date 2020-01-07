@@ -88,12 +88,9 @@ public class Main{
 				MainProgram.FILE_OUT.equals("NONE")){
 			NetHandler r = new NetHandler(MainProgram.IP, MainProgram.PORT, MainProgram.FILE_OUT, MainProgram.BLOCK_SIZE);
 		}else if (){
-			
-		}
- 		
 
-		// NetHandler r = new NetHandler("127.0.0.1", 6969, "a.png", 1024);
-		// NetHandler r = new NetHandler("NONE", 6969, "t.png", 1024);
+		}
+ 	
 		// System.out.write()
 	}
 }
