@@ -100,7 +100,7 @@ public class Main{
 	int decimalExample = Integer.valueOf("20"); 
 	float f = Float.parseFloat(decimal);
 	double d = Double.parseDouble(str)
-	
+
 	optionalArgValue
 	positionalArgument
 	e.getMessage()
