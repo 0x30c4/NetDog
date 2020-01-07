@@ -90,12 +90,8 @@ public class Main{
 		}else if (){
 
 		}
- 	
-		// System.out.write()
 	}
 }
-
-
 	/*
 	int decimalExample = Integer.valueOf("20"); 
 	float f = Float.parseFloat(decimal);
