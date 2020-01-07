@@ -16,40 +16,68 @@ public class NetHandler{
     public NetHandler(String ip, int port, String fileName, int byteSize){
         this.fileName = fileName;
         this.byteSize = byteSize;
-        if (ip.equals("None")){
+        if (this.fileName.equals("NONE"))
+            this.printTheData(port);
+
+        if (ip.equals("NONE")){
             this.recever(port);
         }else{
         	this.sender(ip, port);
         }
 	}
-	public void recever(int port){
+
+    public void printTheData(int port){
         DataInputStream in = null;
         ServerSocket server = null;
-        FileHandler fh = new FileHandler();
         try{
             server = new ServerSocket(port);
             System.out.println("Waiting....");
             this.socket = server.accept();
             in = new DataInputStream(new BufferedInputStream(this.socket.getInputStream()));
-            fh.fileRecever(this.fileName, in, this.byteSize);
+            byte[] b = new byte[this.byteSize];
+            int noOfBytes = 0;
+            try{
+                while ((noOfBytes = in.read(b)) != -1 ) {
+                    System.out.write(b, 0, noOfBytes);
+                }
+            }catch(IOException e){
+                // System.out.println(e);
+            }
             in.close();
             this.socket.close();
         }catch(IOException e){
-            System.out.println(e);
+            // System.out.println(e);
+        }        
+    }
+
+	public void recever(int port){
+        DataInputStream in = null;
+        ServerSocket server = null;
+        FileHandler fh = new FileHandler(this.fileName, this.byteSize);
+        try{
+            server = new ServerSocket(port);
+            System.out.println("Waiting....");
+            this.socket = server.accept();
+            in = new DataInputStream(new BufferedInputStream(this.socket.getInputStream()));
+            fh.fileRecever(in);
+            in.close();
+            this.socket.close();
+        }catch(IOException e){
+            // System.out.println(e);
         }
 	}
 	public void sender(String ip, int port){
         PrintStream out = null;
-        FileHandler fh = new FileHandler();
+        FileHandler fh = new FileHandler(this.fileName, this.byteSize);
         try{
             this.socket = new Socket(ip, port);
             out = new PrintStream(this.socket.getOutputStream());
-            fh.fileSender(this.fileName, out, this.byteSize);
+            fh.fileSender(out);
             this.socket.close();
 	   }catch(UnknownHostException e){
-        System.out.println(e);
+        // System.out.println(e);
        }catch(IOException e){
-        System.out.println(e);
+        // System.out.println(e);
        }
     }
 }

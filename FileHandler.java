@@ -6,33 +6,41 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 public class FileHandler{
-	public void fileSender(String fileName, PrintStream outStream, int byteSize) {
+	public String fileName;
+	public int byteSize;
+
+	public FileHandler(String fileName, int byteSize){
+		this.fileName = fileName;
+		this.byteSize = byteSize;
+	}
+
+	public void fileSender(PrintStream outStream) {
 		try{
-			FileInputStream fin = new FileInputStream(fileName);
+			FileInputStream fin = new FileInputStream(this.fileName);
 			
-			byte[] b = new byte[byteSize];
+			byte[] b = new byte[this.byteSize];
 			int noOfBytes = 0;
 			
 			while( (noOfBytes = fin.read(b)) != -1 ){
 				outStream.write(b, 0, noOfBytes);
-			}
+			}			
 			fin.close();
-			
 		}catch(Exception e){
-			System.out.println(e);
+			// System.out.println(e);
 		}
     }
-	public void fileRecever(String f, DataInputStream inStream, int byteSize){
+	public void fileRecever(DataInputStream inStream){
 		try{
-			FileOutputStream fout = new FileOutputStream(f);
-			byte[] b = new byte[byteSize];
+			FileOutputStream fout = new FileOutputStream(this.fileName);
+			byte[] b = new byte[this.byteSize];
 			int noOfBytes = 0;
 			while( (noOfBytes = inStream.read(b)) != -1 ){
 				fout.write(b, 0, noOfBytes);
 			}
 			fout.close();
 		}catch(Exception e){
-			System.out.println(e);
+			// System.out.println(e);
 		}
 	}
+
 }
