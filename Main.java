@@ -88,6 +88,7 @@ public class Main{
 				MainProgram.FILE_OUT.equals("NONE")){
 			NetHandler r = new NetHandler(MainProgram.IP, MainProgram.PORT, MainProgram.FILE_OUT, MainProgram.BLOCK_SIZE);
 		}else if (){
+			
 		}
  		
 
