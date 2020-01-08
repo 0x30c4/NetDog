@@ -11,26 +11,30 @@ import java.net.Socket;
 public class NetHandler{
 	private Socket socket = null;
     private String fileName;
+    private String ip;
     private int byteSize;
+    private int port;
 
     public NetHandler(String ip, int port, String fileName, int byteSize){
+        this.port = port;
+        this.ip = ip;
         this.fileName = fileName;
         this.byteSize = byteSize;
         if (this.fileName.equals("NONE"))
-            this.printTheData(port);
+            this.printTheData();
 
         if (ip.equals("NONE")){
-            this.recever(port);
+            this.recever();
         }else{
-        	this.sender(ip, port);
+        	this.sender();
         }
 	}
 
-    public void printTheData(int port){
+    public void printTheData(){
         DataInputStream in = null;
         ServerSocket server = null;
         try{
-            server = new ServerSocket(port);
+            server = new ServerSocket(this.port);
             System.out.println("Waiting....");
             this.socket = server.accept();
             in = new DataInputStream(new BufferedInputStream(this.socket.getInputStream()));
@@ -50,12 +54,12 @@ public class NetHandler{
         }        
     }
 
-	public void recever(int port){
+	public void recever(){
         DataInputStream in = null;
         ServerSocket server = null;
         FileHandler fh = new FileHandler(this.fileName, this.byteSize);
         try{
-            server = new ServerSocket(port);
+            server = new ServerSocket(this.port);
             System.out.println("Waiting....");
             this.socket = server.accept();
             in = new DataInputStream(new BufferedInputStream(this.socket.getInputStream()));
@@ -66,11 +70,11 @@ public class NetHandler{
             // System.out.println(e);
         }
 	}
-	public void sender(String ip, int port){
+	public void sender(){
         PrintStream out = null;
         FileHandler fh = new FileHandler(this.fileName, this.byteSize);
         try{
-            this.socket = new Socket(ip, port);
+            this.socket = new Socket(this.ip, this.port);
             out = new PrintStream(this.socket.getOutputStream());
             fh.fileSender(out);
             this.socket.close();

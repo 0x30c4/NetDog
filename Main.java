@@ -4,7 +4,6 @@ public class Main{
 	private	String IP = "NONE";
 	private	String FILE_IN = "NONE";
 	private	String FILE_OUT = "NONE";
-	private	String LOG_FILE = "NONE";
 	private	boolean LISTEN = false;
 
 	public void CliMode(String[] args){
@@ -18,7 +17,6 @@ public class Main{
 
 		usrio.AddOpt("-f", "--file-name", "file_name", "str","The input file.");
 		usrio.AddOpt("-o", "--out-file", "out_file", "str", "The output file.");
-		usrio.AddOpt("-L", "--log", "log_file", "str", "It redirect all the out put to a log file.");
 
 		usrio.AddOpt("-b", "--bytes", "bytes", "int", "Read and write up to BYTES bytes at a time (default: 1024)");
 
@@ -49,14 +47,12 @@ public class Main{
 			this.FILE_OUT = usrio.optionalArgValue.get("out_file");
 		if (usrio.optionalArgValue.get("ip_addr") != null)
 			this.IP = usrio.optionalArgValue.get("ip_addr");
-		if (usrio.optionalArgValue.get("log_file") != null)
-			this.LOG_FILE = usrio.optionalArgValue.get("log_file");
 		if (usrio.optionalArgValue.get("ip:port") != null){
 			this.IP = usrio.optionalArgValue.get("ip:port").split(":", 0)[0];
 			try{
-				this.PORT = Integer.valueOf(usrio.optionalArgValue.get("ip_port").split(":", 0)[1]);
-			}catch(Exception e){
-				System.out.println("Value Error: [" + usrio.optionalArgValue.get("ip_port").split(":", 0)[1] + "] is not an Integer.");
+				this.PORT = Integer.valueOf(usrio.optionalArgValue.get("ip:port").split(":", 0)[1]);
+			}catch(NullPointerException e){
+				System.out.println("Value Error: [" + usrio.optionalArgValue.get("ip:port").split(":", 0)[1] + "] is not an Integer.");				
 				System.exit(0);
 			}
 		}
@@ -65,30 +61,35 @@ public class Main{
 			this.LISTEN = true;
 	}
 
-	public void GuiMode(){
-		System.out.println("GUI");
-	}
-
 	public static void main(String[] args) {
 		Main MainProgram = new Main();
-		if (args.length != 0)
-			MainProgram.CliMode(args);
-		else
-			MainProgram.GuiMode();
+		MainProgram.CliMode(args);
 
-		System.out.println("port \t\t" + MainProgram.PORT);
-		System.out.println("ip \t\t" + MainProgram.IP);
-		System.out.println("block size \t" + MainProgram.BLOCK_SIZE);
-		System.out.println("file in \t" + MainProgram.FILE_IN);
-		System.out.println("file out \t" + MainProgram.FILE_OUT);
-		System.out.println("file out \t" + MainProgram.LOG_FILE);
+		// System.out.println("port \t\t" + MainProgram.PORT);
+		// System.out.println("ip \t\t" + MainProgram.IP);
+		// System.out.println("block size \t" + MainProgram.BLOCK_SIZE);
+		// System.out.println("file in \t" + MainProgram.FILE_IN);
+		// System.out.println("file out \t" + MainProgram.FILE_OUT);
 
-		System.out.println("listen \t\t" + MainProgram.LISTEN);
-		if (MainProgram.LISTEN && MainProgram.IP.equals("NONE") &&
-				MainProgram.FILE_OUT.equals("NONE")){
+		// System.out.println("listen \t\t" + MainProgram.LISTEN);
+		
+		if (MainProgram.LISTEN && (MainProgram.IP.equals("NONE") &&
+				MainProgram.FILE_IN.equals("NONE"))){
 			NetHandler r = new NetHandler(MainProgram.IP, MainProgram.PORT, MainProgram.FILE_OUT, MainProgram.BLOCK_SIZE);
-		}else if (){
+		}
+		if (MainProgram.LISTEN && (!MainProgram.IP.equals("NONE") ||
+				!MainProgram.FILE_IN.equals("NONE"))){
+			System.out.println("netdog: some arguments may be invalid for particular context.\nTry 'netdog --help' for more information.");
+			System.exit(0);
+		}
+		
+		if (!MainProgram.LISTEN && !MainProgram.FILE_OUT.equals("NONE")){
+			System.out.println("netdog: some arguments may be invalid for particular context.\nTry 'netdog --help' for more information.");
+			System.exit(0);
+		}
 
+		if (!MainProgram.IP.equals("NONE")){
+			NetHandler r = new NetHandler(MainProgram.IP, MainProgram.PORT, MainProgram.FILE_IN, MainProgram.BLOCK_SIZE);
 		}
 	}
 }
