@@ -4,17 +4,27 @@ import java.io.BufferedInputStream;
 import java.io.FileOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.File;
 
 public class FileHandler{
 	public String fileName;
 	public int byteSize;
+	public double fileSize;
 
 	public FileHandler(String fileName, int byteSize){
+		File f = new File(fileName);
+		if (!f.exists())
+			System.err.println("[" + this.fileName + "] File doesn't exist.");
+			System.exit(0);
+		
 		this.fileName = fileName;
 		this.byteSize = byteSize;
+		this.fileSize = f.length();
+		System.out.println(this.fileSize);
 	}
 
 	public void fileSender(PrintStream outStream) {
+
 		try{
 			FileInputStream fin = new FileInputStream(this.fileName);
 			
