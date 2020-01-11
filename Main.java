@@ -68,8 +68,8 @@ public class Main{
 		// System.out.println("port \t\t" + MainProgram.PORT);
 		// System.out.println("ip \t\t" + MainProgram.IP);
 		// System.out.println("block size \t" + MainProgram.BLOCK_SIZE);
-		// System.out.println("file in \t" + MainProgram.FILE_IN);
-		// System.out.println("file out \t" + MainProgram.FILE_OUT);
+		System.out.println("file in \t" + MainProgram.FILE_IN);
+		System.out.println("file out \t" + MainProgram.FILE_OUT);
 
 		// System.out.println("listen \t\t" + MainProgram.LISTEN);
 		
@@ -79,12 +79,12 @@ public class Main{
 		}
 		if (MainProgram.LISTEN && (!MainProgram.IP.equals("NONE") ||
 				!MainProgram.FILE_IN.equals("NONE"))){
-			System.out.println("netdog: some arguments may be invalid for particular context.\nTry 'netdog --help' for more information.");
+			System.err.println("netdog: some arguments may be invalid for particular context.\nTry 'netdog --help' for more information.");
 			System.exit(0);
 		}
 		
 		if (!MainProgram.LISTEN && !MainProgram.FILE_OUT.equals("NONE")){
-			System.out.println("netdog: some arguments may be invalid for particular context.\nTry 'netdog --help' for more information.");
+			System.err.println("netdog: some arguments may be invalid for particular context.\nTry 'netdog --help' for more information.");
 			System.exit(0);
 		}
 
@@ -102,6 +102,8 @@ public class Main{
 	e.getMessage()
 	*/
 // alias a=git add Main.java FileHandler.java NetHandler.java README.md; git commit -m "." ; git push ; echo -e "\n" >> Main.java
+
+
 
 
 

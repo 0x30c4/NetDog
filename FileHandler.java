@@ -13,9 +13,10 @@ public class FileHandler{
 
 	public FileHandler(String fileName, int byteSize){
 		File f = new File(fileName);
-		if (!f.exists())
+		if (!f.exists()){
 			System.err.println("[" + this.fileName + "] File doesn't exist.");
 			System.exit(0);
+		}
 		
 		this.fileName = fileName;
 		this.byteSize = byteSize;
@@ -36,7 +37,7 @@ public class FileHandler{
 			}			
 			fin.close();
 		}catch(Exception e){
-			// System.out.println(e);
+			System.err.println(e);
 		}
     }
 	public void fileRecever(DataInputStream inStream){
@@ -49,7 +50,7 @@ public class FileHandler{
 			}
 			fout.close();
 		}catch(Exception e){
-			// System.out.println(e);
+			System.err.println(e);
 		}
 	}
 

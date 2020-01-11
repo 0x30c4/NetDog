@@ -45,13 +45,14 @@ public class NetHandler{
                     System.out.write(b, 0, noOfBytes);
                 }
             }catch(IOException e){
-                // System.out.println(e);
+                System.err.println(e);
             }
             in.close();
             this.socket.close();
         }catch(IOException e){
-            // System.out.println(e);
+            System.err.println(e);
         }        
+        System.exit(0);
     }
 
 	public void recever(){
@@ -67,8 +68,9 @@ public class NetHandler{
             in.close();
             this.socket.close();
         }catch(IOException e){
-            // System.out.println(e);
+            System.err.println(e);
         }
+        System.exit(0);
 	}
 	public void sender(){
         PrintStream out = null;
@@ -79,9 +81,10 @@ public class NetHandler{
             fh.fileSender(out);
             this.socket.close();
 	   }catch(UnknownHostException e){
-        // System.out.println(e);
+        System.err.println(e);
        }catch(IOException e){
-        // System.out.println(e);
+        System.err.println(e);
        }
+       System.exit(0);
     }
 }
