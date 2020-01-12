@@ -43,6 +43,7 @@ public class NetHandler{
             try{
                 while ((noOfBytes = in.read(b)) != -1 ) {
                     System.out.write(b, 0, noOfBytes);
+                    System.out.write(noOfBytes);
                 }
             }catch(IOException e){
                 System.err.println(e);

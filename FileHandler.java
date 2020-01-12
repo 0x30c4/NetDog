@@ -6,6 +6,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.File;
 
+import java.nio.ByteBuffer;
+
 public class FileHandler{
 	public String fileName;
 	public int byteSize;
@@ -23,21 +25,22 @@ public class FileHandler{
 		this.fileSize = f.length();
 		System.out.println(this.fileSize);
 	}
-
 	public void fileSender(PrintStream outStream) {
 
 		try{
 			FileInputStream fin = new FileInputStream(this.fileName);
-			byte fs = (byte)this.fileSize;
-			double a = (double)fs;
-			System.out.println(fs);
-			System.out.println(a);
-			System.out.println(this.fileSize);
-
+			
+			byte output = (byte) this.fileSize;
+			// outStream.write(b, 0, noOfBytes);
 
 			byte[] b = new byte[this.byteSize];
 			int noOfBytes = 0;
-			
+			String d = new Double(this.fileSize).toString();
+			// noOfBytes = this.toByteArray(this.fileSize);
+
+			// System.out.println(this.toByteArray(this.fileSize));
+			// System.out.println(this.toDouble(this.toByteArray(this.fileSize)));
+			outStream.write(d.getBytes());
 			while( (noOfBytes = fin.read(b)) != -1 ){
 				outStream.write(b, 0, noOfBytes);
 			}			
@@ -49,10 +52,9 @@ public class FileHandler{
 	public void fileRecever(DataInputStream inStream){
 		try{
 			FileOutputStream fout = new FileOutputStream(this.fileName);
-			byte fs = (byte)this.fileSize; 
-			System.out.println(fs);
 			byte[] b = new byte[this.byteSize];
 			int noOfBytes = 0;
+			System.out.println(inStream.readUTF(8));
 			while( (noOfBytes = inStream.read(b)) != -1 ){
 				fout.write(b, 0, noOfBytes);
 			}
