@@ -35,7 +35,7 @@ public class NetHandler{
         ServerSocket server = null;
         try{
             server = new ServerSocket(this.port);
-            System.out.println("Waiting....");
+            System.out.println("Listening on [" + this.port + "]");
             this.socket = server.accept();
             in = new DataInputStream(new BufferedInputStream(this.socket.getInputStream()));
             byte[] b = new byte[this.byteSize];
@@ -61,7 +61,7 @@ public class NetHandler{
         FileHandler fh = new FileHandler(this.fileName, this.byteSize);
         try{
             server = new ServerSocket(this.port);
-            System.out.println("Waiting....");
+            System.out.println("Listening on [" + this.port + "]");
             this.socket = server.accept();
             in = new DataInputStream(new BufferedInputStream(this.socket.getInputStream()));
             fh.fileRecever(in);

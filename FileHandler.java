@@ -28,7 +28,13 @@ public class FileHandler{
 
 		try{
 			FileInputStream fin = new FileInputStream(this.fileName);
-			
+			byte fs = (byte)this.fileSize;
+			double a = (double)fs;
+			System.out.println(fs);
+			System.out.println(a);
+			System.out.println(this.fileSize);
+
+
 			byte[] b = new byte[this.byteSize];
 			int noOfBytes = 0;
 			
@@ -43,6 +49,8 @@ public class FileHandler{
 	public void fileRecever(DataInputStream inStream){
 		try{
 			FileOutputStream fout = new FileOutputStream(this.fileName);
+			byte fs = (byte)this.fileSize; 
+			System.out.println(fs);
 			byte[] b = new byte[this.byteSize];
 			int noOfBytes = 0;
 			while( (noOfBytes = inStream.read(b)) != -1 ){
