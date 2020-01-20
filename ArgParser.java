@@ -219,7 +219,7 @@ public class ArgParser{
 			l = true;
 			arg = this.args.get(i);
 			try{	
-			// Finding all the short optional options whether they consist any positional argument or not.
+			// Finding all the short optional options whether they consist any positional argument or not. 
 				if (arg.startsWith("-") && arg.charAt(1) != '-' && arg.length() == 2){
 
 					if (this.checkIfMatch(arg, this.no_val_short)){
