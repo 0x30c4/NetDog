@@ -5,6 +5,7 @@ public class Main{
 	private	String FILE_IN = "NONE";
 	private	String FILE_OUT = "NONE";
 	private	boolean LISTEN = false;
+	private	boolean PIPE = false;
 
 	public void CliMode(String[] args){
 		String gap = "\n\t\t\t      ";
@@ -60,11 +61,12 @@ public class Main{
 		if (usrio.optionalArg.get("l") != null)
 			this.LISTEN = true;
 	}
-
+	
 	public static void main(String[] args) {
 		Main MainProgram = new Main();
 		MainProgram.CliMode(args);
-
+		MainProgram.PIPE = FileHandler.ifPiped();
+		FileHandler.rp();
 		// System.out.println("port \t\t" + MainProgram.PORT);
 		// System.out.println("ip \t\t" + MainProgram.IP);
 		// System.out.println("block size \t" + MainProgram.BLOCK_SIZE);
@@ -74,11 +76,11 @@ public class Main{
 		// System.out.println("listen \t\t" + MainProgram.LISTEN);
 
 		if (MainProgram.LISTEN && (MainProgram.IP.equals("NONE") &&
-				MainProgram.FILE_IN.equals("NONE"))){
+				MainProgram.FILE_IN.equals("NONE")) && !MainProgram.PIPE){
 			NetHandler r = new NetHandler(MainProgram.IP, MainProgram.PORT, MainProgram.FILE_OUT, MainProgram.BLOCK_SIZE);
 		}
 		if (MainProgram.LISTEN && (!MainProgram.IP.equals("NONE") ||
-				!MainProgram.FILE_IN.equals("NONE"))){
+				!MainProgram.FILE_IN.equals("NONE")) && !MainProgram.PIPE){
 			System.err.println("netdog: some arguments may be invalid for particular context.\nTry 'netdog --help' for more information.");
 			System.exit(0);
 		}
@@ -91,9 +93,13 @@ public class Main{
 		if (!MainProgram.IP.equals("NONE") && !MainProgram.FILE_IN.equals("NONE")){
 			NetHandler r = new NetHandler(MainProgram.IP, MainProgram.PORT, MainProgram.FILE_IN, MainProgram.BLOCK_SIZE);
 		}
-		if (!(!MainProgram.IP.equals("NONE") && !MainProgram.FILE_IN.equals("NONE"))){
-			System.err.println("netdog: need to gave a file.\nTry 'netdog --help' for more information.");
+		if (!(!MainProgram.IP.equals("NONE") && !MainProgram.FILE_IN.equals("NONE")) && !MainProgram.PIPE){
+			System.err.println("netdog: need to gave a file name or there was no data from the pipe.\nTry 'netdog --help' for more information.");
 			System.exit(0);
+		}
+		if (MainProgram.PIPE && !MainProgram.IP.equals("NONE")){
+			System.out.println(1);
+			NetHandler r = new NetHandler(MainProgram.IP, MainProgram.PORT, MainProgram.FILE_OUT, MainProgram.BLOCK_SIZE);			
 		}
 	}
 }
