@@ -65,8 +65,6 @@ public class Main{
 	public static void main(String[] args) {
 		Main MainProgram = new Main();
 		MainProgram.CliMode(args);
-		MainProgram.PIPE = FileHandler.ifPiped();
-		FileHandler.rp();
 		// System.out.println("port \t\t" + MainProgram.PORT);
 		// System.out.println("ip \t\t" + MainProgram.IP);
 		// System.out.println("block size \t" + MainProgram.BLOCK_SIZE);
@@ -79,6 +77,7 @@ public class Main{
 				MainProgram.FILE_IN.equals("NONE")) && !MainProgram.PIPE){
 			NetHandler r = new NetHandler(MainProgram.IP, MainProgram.PORT, MainProgram.FILE_OUT, MainProgram.BLOCK_SIZE);
 		}
+
 		if (MainProgram.LISTEN && (!MainProgram.IP.equals("NONE") ||
 				!MainProgram.FILE_IN.equals("NONE")) && !MainProgram.PIPE){
 			System.err.println("netdog: some arguments may be invalid for particular context.\nTry 'netdog --help' for more information.");
@@ -111,4 +110,5 @@ public class Main{
 	positionalArgument
 	e.getMessage()
 	*/
+
 // alias a=git add Main.java FileHandler.java NetHandler.java README.md; git commit -m "." ; git push ; echo -e "\n" >> Main.java
