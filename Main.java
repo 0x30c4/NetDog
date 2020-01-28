@@ -5,12 +5,11 @@ public class Main{
 	private	String FILE_IN = "NONE";
 	private	String FILE_OUT = "NONE";
 	private	boolean LISTEN = false;
-	private	boolean PIPE = false;
 
 	public void CliMode(String[] args){
 		String gap = "\n\t\t\t      ";
 
-		ArgParser usrio = new ArgParser(args, "netdog", "A simple networking utility made with java.\nTo use Graphical Interface gave no argument.");
+		ArgParser usrio = new ArgParser(args, "netdog", "A simple networking utility made with java.\nIt can use pipe for that don't use any file argument.");
 
 		usrio.AddOpt("-i", "--ip-addr", "ip_addr", "str","Host name or ip address.");
 		usrio.AddOpt("-a", "--ip-port", "ip:port", "str","The ip and the port [IP:PORT]");
@@ -73,42 +72,39 @@ public class Main{
 
 		// System.out.println("listen \t\t" + MainProgram.LISTEN);
 
-		if (MainProgram.LISTEN && (MainProgram.IP.equals("NONE") &&
-				MainProgram.FILE_IN.equals("NONE")) && !MainProgram.PIPE){
-			NetHandler r = new NetHandler(MainProgram.IP, MainProgram.PORT, MainProgram.FILE_OUT, MainProgram.BLOCK_SIZE);
-		}
-
-		if (MainProgram.LISTEN && (!MainProgram.IP.equals("NONE") ||
-				!MainProgram.FILE_IN.equals("NONE")) && !MainProgram.PIPE){
+		//checking for any invalid input.
+		if ((MainProgram.LISTEN && (!MainProgram.IP.equals("NONE") || !MainProgram.FILE_IN.equals("NONE"))) ||
+			 (!MainProgram.LISTEN && !MainProgram.FILE_OUT.equals("NONE"))){
 			System.err.println("netdog: some arguments may be invalid for particular context.\nTry 'netdog --help' for more information.");
 			System.exit(0);
 		}
 
-		if (!MainProgram.LISTEN && !MainProgram.FILE_OUT.equals("NONE")){
-			System.err.println("netdog: some arguments may be invalid for particular context.\nTry 'netdog --help' for more information.");
-			System.exit(0);
+		NetHandler r = new NetHandler(MainProgram.IP, MainProgram.PORT, MainProgram.BLOCK_SIZE);
+		boolean ifNotPiped = false;
+
+		if (MainProgram.LISTEN && MainProgram.IP.equals("NONE") &&
+				MainProgram.FILE_IN.equals("NONE")){
+			r.recever(MainProgram.FILE_OUT);
 		}
 
-		if (!MainProgram.IP.equals("NONE") && !MainProgram.FILE_IN.equals("NONE")){
-			NetHandler r = new NetHandler(MainProgram.IP, MainProgram.PORT, MainProgram.FILE_IN, MainProgram.BLOCK_SIZE);
+		if (!MainProgram.LISTEN && !MainProgram.IP.equals("NONE") && !MainProgram.FILE_IN.equals("NONE")){
+			ifNotPiped = r.sender(MainProgram.FILE_IN);
 		}
-		if (!(!MainProgram.IP.equals("NONE") && !MainProgram.FILE_IN.equals("NONE")) && !MainProgram.PIPE){
-			System.err.println("netdog: need to gave a file name or there was no data from the pipe.\nTry 'netdog --help' for more information.");
-			System.exit(0);
+
+		if (MainProgram.IP.equals("NONE") && MainProgram.FILE_IN.equals("NONE") &&
+				!MainProgram.FILE_OUT.equals("NONE") && MainProgram.LISTEN){
+			r.recever(MainProgram.FILE_OUT);
 		}
-		if (MainProgram.PIPE && !MainProgram.IP.equals("NONE")){
-			System.out.println(1);
-			NetHandler r = new NetHandler(MainProgram.IP, MainProgram.PORT, MainProgram.FILE_OUT, MainProgram.BLOCK_SIZE);			
+		if (!MainProgram.IP.equals("NONE") && MainProgram.FILE_IN.equals("NONE") 
+			&& MainProgram.FILE_OUT.equals("NONE") && !MainProgram.LISTEN){
+			ifNotPiped = r.sender("NONE");
 		}
+
+		//checking for data input error check.
+		if (!MainProgram.LISTEN && !MainProgram.IP.equals("NONE") && MainProgram.FILE_IN.equals("NONE") && !ifNotPiped){
+            System.err.println("netdog: no file or data was given or pipped.\nTry 'netdog --help' for more information.");
+            System.exit(0);
+        }
 	}
 }
-	/*
-	int decimalExample = Integer.valueOf("20"); 
-	float f = Float.parseFloat(decimal);
-	double d = Double.parseDouble(str)
-	optionalArgValue
-	positionalArgument
-	e.getMessage()
-	*/
-
 // alias a=git add Main.java FileHandler.java NetHandler.java README.md; git commit -m "." ; git push ; echo -e "\n" >> Main.java
