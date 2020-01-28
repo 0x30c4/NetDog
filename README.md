@@ -8,4 +8,6 @@ After compiling to use it
 <code>
 $ java Main --help
 </code>
-![netdog help menu](help.png "Shit-finder help menu!!")
+
+
+![netdog help menu](help.png)
