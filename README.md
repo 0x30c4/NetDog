@@ -7,5 +7,6 @@ After compiling to use it
 
 <code>
 $ java Main --help
-![alt text](https://raw.githubusercontent.com/0x30c4/NetDog/master/help.png "netdog help menu!!")
 </code>
+![alt text](https://raw.githubusercontent.com/0x30c4/NetDog/master/help.png "netdog help menu!!")
+
