@@ -3,7 +3,6 @@
 <h4>It's a simple command line network tool for regular usage.</h4>
 
 # Compiling packages
-## This method will just work for linux and mac.For windows you need to do it manually.</h6>
 If you are not using a IDE then use this command to compile the packages.<br>
 <code>
 	$ git clone https://github.com/0x30c4/NetDog.git
@@ -14,7 +13,7 @@ If you are not using a IDE then use this command to compile the packages.<br>
 </code>
 <br>
 <code>
-	$ find src -name "\*.java" | xargs javac -d .<br>
+	$ find src -name "\*.java" | xargs javac -d . # This commands are only for linux and mac.In windows you need to do it manually.<br>
 </code>
 <br>
 <code>
