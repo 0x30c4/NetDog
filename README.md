@@ -4,7 +4,7 @@
 
 # Compiling packages
 If you are not using a IDE then use this command to compile the packages.<br>
-
+*This method will just work for linux and mac.For windows you need to do it manually.*
 <code>
 	$ git clone https://github.com/0x30c4/NetDog.git
 </code>
