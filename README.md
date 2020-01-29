@@ -7,9 +7,11 @@ If you are not using a IDE then use this command to compile the packages.<br>
 <code>
 	$ cd NetDog # Go to the repository directory.
 </code>
+<br>
 <code>
 	$ find src -name "\*.java" | xargs javac -d .<br>
 </code>
+<br>
 <code>
 	$ javac NetDog.java
 </code>
