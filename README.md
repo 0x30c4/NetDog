@@ -6,7 +6,7 @@
 After compiling to use it 
 
 <code>
-$ java Main --help
+$ java NetDog --help
 </code>
 
 
