@@ -4,6 +4,11 @@
 
 # Compiling packages
 If you are not using a IDE then use this command to compile the packages.<br>
+
+<code>
+	$ git clone https://github.com/0x30c4/NetDog.git
+</code>
+<br>
 <code>
 	$ cd NetDog # Go to the repository directory.
 </code>
