@@ -1,4 +1,7 @@
-public class Main{
+import com.netdog.java.utils.ArgParser;
+import com.netdog.java.utils.NetHandler;
+
+public class NetDog{
 	private int PORT = 6969; 
 	private int BLOCK_SIZE = 1024;
 	private	String IP = "NONE";
@@ -62,7 +65,7 @@ public class Main{
 	}
 	
 	public static void main(String[] args) {
-		Main MainProgram = new Main();
+		NetDog MainProgram = new NetDog();
 		MainProgram.CliMode(args);
 		// System.out.println("port \t\t" + MainProgram.PORT);
 		// System.out.println("ip \t\t" + MainProgram.IP);

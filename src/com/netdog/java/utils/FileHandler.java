@@ -1,3 +1,5 @@
+package com.netdog.java.utils;
+
 import java.io.DataInputStream;
 import java.io.PrintStream;
 import java.io.BufferedInputStream;

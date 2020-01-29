@@ -1,3 +1,5 @@
+package com.netdog.java.utils;
+
 /**
 * This is a simple command line argument parser.
 * 
