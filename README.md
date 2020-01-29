@@ -13,7 +13,7 @@ If you are not using a IDE then use this command to compile the packages.<br>
 </code>
 <br>
 <code>
-	$ find src -name "\*.java" | xargs javac -d . # This won't work in windows, you need to do it manually.But in UNIX like system it will work.<br>
+	$ find src -name "\*.java" | xargs javac -d . # This won't work in windows, you need to do it manually.But in UNIX like system it will work fine.<br>
 </code>
 <br>
 <code>
