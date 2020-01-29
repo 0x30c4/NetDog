@@ -10,7 +10,7 @@ If you are not using a IDE then use this command to compile the packages.<br>
 </code>
 <br>
 <code>
-	$ cd NetDog # Go to the repository directory.
+	$ cd NetDog
 </code>
 <br>
 <code>
