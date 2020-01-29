@@ -10,4 +10,4 @@ $ java Main --help
 </code>
 
 
-![netdog help menu](help.png)
+![netdog help menu](screenshot/help.png)
