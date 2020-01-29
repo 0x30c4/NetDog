@@ -3,7 +3,7 @@
 <h4>It's a simple command line network tool for regular usage.</h4>
 
 # Compiling packages
-If you are not using a IDE then use this command to compile the packages.
+If you are not using a IDE then use this command to compile the packages.<br>
 <code>
 	$ cd NetDog # Go to the repository directory.
 	$ find src -name "\*.java" | xargs javac -d .
