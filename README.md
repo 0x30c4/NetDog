@@ -1,5 +1,5 @@
 # NetDog
-
+                
 <h4>It's a simple command line network tool for regular usage.</h4> 
 
 # Compiling packages
@@ -34,14 +34,6 @@ $ java NetDog --help
 
 <<<<<<< HEAD
 =======
-
-
-
-
-
-
-
-
 
 
 
