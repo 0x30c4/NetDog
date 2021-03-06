@@ -32,8 +32,6 @@ $ java NetDog --help
 
 
 
-<<<<<<< HEAD
-=======
 
 
 
@@ -181,21 +179,5 @@ $ java NetDog --help
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> 5517562afc6833bab23d7bbd33687c0c691d8cb0
 
 
